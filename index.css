@@ -1,0 +1,13 @@
+.football {
+    display: flex;
+}
+
+#scoreOne,
+#scoreTwo {
+    margin: 0 20px 0 20px;
+    width: 80px;
+    height: 20px;
+    border: 1px solid black;
+}
+
+
