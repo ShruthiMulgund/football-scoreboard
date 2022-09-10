@@ -3,7 +3,7 @@
 1. Implemented all the listed operations
 2. The below statement was ambiguous and the example was not clear, hence implemented the solution with the assumption : latest match will be displayed first in the summary section.
 
-4. Get a summary of games by total score. Those games with the same total score will be returned ordered by the most recently added to our system.
+=>  Get a summary of games by total score. Those games with the same total score will be returned ordered by the most recently added to our system.
 As an example, being the current data in the system:
 
 a.	Mexico - Canada: 0 - 5
