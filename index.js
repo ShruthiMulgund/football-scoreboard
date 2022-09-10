@@ -1,9 +1,17 @@
 let homeTeam;
 let awayTeam;
+
 let homeTeamScore;
 let awayTeamScore;
+
 let summary;
 let summaryStack = [];
+
+let arr1 = [];
+let arr2 = [];
+
+let totalHomeTeamScore;
+let totalAwayTeamScore;
 
 function startMatch() {
     homeTeam = prompt("Please enter the name of home team", "");
@@ -24,30 +32,45 @@ function startMatch() {
 }
 
 function updateScore() {
+
+
     homeTeamScore = prompt("Please enter the score for home team", "");
     homeTeamScore = isNumber(homeTeamScore);
-
-    let tothomeTeamScore = getTotalScore(homeTeamScore);
-    console.log("total 1=> ", tothomeTeamScore);
 
     awayTeamScore = prompt("Please enter the score for away team", "");
     awayTeamScore = isNumber(awayTeamScore);
 
-    let totawayTeamScore = getTotalScore(awayTeamScore);
-    console.log("total 2=> ", totawayTeamScore);
+    document.getElementById("scoreOne").innerHTML = homeTeamScore;
+    document.getElementById("scoreTwo").innerHTML = awayTeamScore;
 
-    document.getElementById("scoreOne").innerHTML = tothomeTeamScore;
-    document.getElementById("scoreTwo").innerHTML = totawayTeamScore;
+    let home = parseInt(homeTeamScore, 10);
+    let away = parseInt(awayTeamScore, 10);
+
+    arr1.push(home);
+    arr2.push(away);
+
+    totalHomeTeamScore = totalScore(arr1);
+    totalAwayTeamScore = totalScore(arr2);
+
+    displayScore("scoreOne", totalHomeTeamScore);
+    displayScore("scoreTwo", totalAwayTeamScore);
 
 }
 
+function totalScore(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+
+function displayScore(teamName, tothomeTeamScore) {
+    document.getElementById(`${teamName}`).innerHTML = tothomeTeamScore;
+}
+
 function getTotalScore(score) {
-    let homeArr = [];
-    homeArr.push(score);
-
-    console.log("arr=> ", score);
-
-    return homeArr.reduce((a, b) => a + b);
+    return score.reduce((a, b) => a + b);
 }
 
 function setScoresToZero() {
@@ -62,7 +85,7 @@ function setScoresToZero() {
 function isAlphabet(team, name) {
     team = team.toLowerCase();
     while (!/^[a-z]+$/.test(team)) {
-        alert("Invalid input. Please enter name from letters from a-z");
+        alert("Invalid input. Please enter name from letters between a-z");
         team = prompt(`Please enter the name for ${name} team`);
     }
 
@@ -71,7 +94,7 @@ function isAlphabet(team, name) {
 
 function isNumber(score) {
     while (!/^[0-9]+$/.test(score)) {
-        alert("You did not enter a number.");
+        alert("Invalid input. Please enter a number between 0 & 9.");
         score = prompt("Please enter the score for team");
     }
 
@@ -79,19 +102,19 @@ function isNumber(score) {
 }
 
 function endMatch() {
-    summary = `${homeTeam} ${homeTeamScore} - ${awayTeam} ${awayTeamScore}`;
+    summary = `${homeTeam} ${totalHomeTeamScore} - ${awayTeam} ${totalAwayTeamScore}`;
     summaryStack.push(summary);
 
-    document.getElementById("summary").innerHTML = summaryStack.join(" <br> ");
+    let latestFirst = summaryStack.reverse();
 
-    homeTeam = '';
-    awayTeam = '';
-    homeTeamScore = '';
-    awayTeamScore = '';
+    document.getElementById("summary").innerHTML = latestFirst.join(" <br> ");
 
-    document.getElementById("teamOne").innerHTML = homeTeam;
-    document.getElementById("scoreOne").innerHTML = awayTeam;
-    document.getElementById("teamTwo").innerHTML = homeTeamScore;
-    document.getElementById("scoreTwo").innerHTML = awayTeamScore;
+    arr1 = [];
+    arr2 = [];
+
+    document.getElementById("teamOne").innerHTML = '';
+    document.getElementById("scoreOne").innerHTML = '';
+    document.getElementById("teamTwo").innerHTML = '';
+    document.getElementById("scoreTwo").innerHTML = '';
 
 }
