@@ -1,5 +1,24 @@
 .football {
     display: flex;
+    margin: auto;
+    width: 20%;
+    border: 1px solid black;
+    padding: 50px;
+}
+
+.start {
+    margin: auto;
+    width: 20%;
+}
+
+.updateScore {
+    margin: auto;
+    width: 20%;
+}
+
+.finish {
+    margin: auto;
+    width: 20%;
 }
 
 #scoreOne,
@@ -9,5 +28,3 @@
     height: 20px;
     border: 1px solid black;
 }
-
-
